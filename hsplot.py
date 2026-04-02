@@ -23,7 +23,7 @@ class_colors = {
     "lock": "#A27099",
     "Warrior": "#C81518"
 }
-df["class"] = df["name"].str.extract(f"({'|'.join(class_colors.keys())})")
+df["class"] = df["name"].str.extract(f"({"|".join(class_colors.keys())})")
 df["color"] = df["class"].map(class_colors).fillna("black")
 df["class"] = df["class"].replace("lock", "Warlock")
 df["is_hl"] = df["name"].str.contains("HL|Highlander")
