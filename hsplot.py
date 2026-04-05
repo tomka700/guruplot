@@ -41,7 +41,7 @@ plt.xlabel("# of games (top 100 this patch)")
 plt.xscale("log")
 plt.ylabel("Win Rate (%)")
 l = [m*z for e in range(len(str(min(df["pop"])))-1,len(str(max(df["pop"])))) for m in range(1,10) if min(df["pop"])-(z:=10**e) < m*z < max(df["pop"])+z]
-plt.xticks(l, labels=l)
+plt.xticks(l, l)
 plt.yticks(range(ceil(min(df["winrate"])) - 1, floor(max(df["winrate"])) + 2))
 plt.axhline(y=50, color="black", linewidth=0.6)
 plt.grid()
