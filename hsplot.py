@@ -4,6 +4,7 @@ import pandas as pd
 data = [
     # replace this with the input
 ]
+if not data: raise ValueError("No Data")
 df = pd.DataFrame(data)
 
 class_colors = {
