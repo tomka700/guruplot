@@ -6,7 +6,7 @@ data = [
 ]
 if not data: raise ValueError("No Data")
 rank = data[0].replace("_", " ")
-rank = rank if "top" in rank else rank.replace("diamond ", "d").replace("to", "-").replace(" legend", "l").replace("1", "d1")
+rank = rank.replace("legend", "1k") if "top" in rank else rank.replace("diamond ", "d").replace("to", "-").replace(" legend", "l").replace("1", "d1")
 df = pd.DataFrame(data[1])
 
 class_colors = {
