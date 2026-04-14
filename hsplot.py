@@ -51,3 +51,67 @@ for _, row in df.iterrows():
     plt.annotate(row["name"], (row["pop"], row["winrate"]), fontsize=10, alpha=0.7)
 
 plt.show()
+
+#Esetleg kiplot-olhatnánk egy kördiagrammon az öt leggyakrabban játszott archetype-ot,
+#azzal együtt hogy mennyire népszerűek
+#mondjuk itt még ki kell küszöbölni, ha nagyon kicsik az eltérések (akkor nem látszódank a szeletek rendesen)
+top_archetypes = df.nlargest(5, 'pop')
+explode = [0.1, 0.5, 0, 0, 0]
+colors = ( "orange", "cyan", "yellow","blue", "green",)
+
+plt.pie(top_archetypes['pop'], labels=top_archetypes['name'], explode=explode, autopct='%1.2f%%', colors=colors, shadow=True)
+plt.show()
+
+#minden Adatoszlopnál kivehetnénk az 5 (vagy több) leggyaakrabban használt archetype-ot, 
+#minden tulajdonságra (winrate, popularity, turns) egy-egy (5 vagy több oszlopos) oszlop diagrammot csinálhatnánk , 
+#alájuk írnánk az archetype-ok nevét,
+
+fig, axs = plt.subplots(2, 3, figsize=(12, 8), layout='constrained') 
+
+top_winrate_arch = df.nlargest(5, 'winrate')
+axs[0, 0].bar(top_winrate_arch['name'],top_winrate_arch['winrate'], color='green', edgecolor='darkgreen')
+axs[0, 0].set_title("Legnagyobb nyerésrátájúak")
+
+top_pop_arch = df.nlargest(5, 'pop')
+axs[0, 1].bar(top_pop_arch['name'],top_pop_arch['pop'], color='blue', edgecolor='darkblue')
+axs[0, 1].set_title("Legnagyobb győzelmiaránnyal rendelkezők")
+axs[0, 1].set_ylabel("Adatok %-ban")
+
+top_turn_arch = df.nlargest(5, 'turns')
+axs[0, 2].bar(top_turn_arch['name'],top_turn_arch['turns'], color='green', edgecolor='darkgreen')
+axs[0, 2].set_title("Legtöbb körösek")
+
+top_dur_arch = df.nlargest(5, 'duration')
+axs[1, 0].bar(top_dur_arch['name'],top_dur_arch['duration'], color='magenta', edgecolor='red')
+axs[1, 0].set_title("?Nem tudom hogy hívják ezt?")
+
+top_climb_arch = df.nlargest(5, 'climb_speed')
+axs[1, 1].bar(top_climb_arch ['name'],top_climb_arch ['climb_speed'], color='grey', edgecolor='black')
+axs[1, 1].set_title("?Nem tudom hogy hívják ezt?")
+plt.show()
+
+#rendezhetnénk népszerűségben csökkenő/növekvő sorrendben az archetype-okat, 
+#és kilpotolhatnánk az értékekei ilyen pontokkal és azokra ileszthetnénk egy görbét, 
+#aztnán a görbén kijelölnénk egy ponttal a legjobb winrate-s, a max turns értékű archetype-ot
+import numpy as np
+from scipy import interpolate
+
+df = df.sort_values(by='pop')
+num_rows = len(df.index)
+#xdata = np.arange(1,num_rows+1)
+xdata = np.arange(len(df))
+ydata = df["pop"]
+
+f_lin = interpolate.interp1d(xdata, ydata, kind="linear", fill_value="extrapolate")
+f_cub = interpolate.interp1d(xdata, ydata, kind="cubic", fill_value="extrapolate")
+
+xx = np.linspace(1,num_rows+1, 400)
+
+plt.figure()
+plt.plot(xdata, ydata, "o", label="Eredeti adatok")
+plt.plot(xx, f_lin(xx))
+plt.plot(xx, f_cub(xx))
+plt.xticks(xdata, df['name'])
+plt.legend()
+plt.title("Archetype-ok népszerűsége")
+plt.show()
