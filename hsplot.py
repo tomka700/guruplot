@@ -115,3 +115,25 @@ plt.xticks(xdata, df['name'])
 plt.legend()
 plt.title("Archetype-ok népszerűsége")
 plt.show()
+
+#lehetne csinálni olyat hogy class-onként megkeres max-ot,átlagot, mint és kiplotol egy bars-t
+df_max = df.groupby("class")["winrate"].max().reset_index()
+df_min = df.groupby("class")["winrate"].min().reset_index()
+df_avr = df.groupby("class")["winrate"].mean().reset_index()
+
+barWidth = 0.25
+fig = plt.subplots(figsize =(12, 8))
+
+br1 = np.arange(len(df_max["class"])) 
+br2 = [x + barWidth for x in br1] 
+br3 = [x + barWidth for x in br2] 
+
+plt.bar(br1, df_max["winrate"], color ='r', width = barWidth, edgecolor ='grey', label ='max') 
+plt.bar(br2, df_avr["winrate"], color ='g', width = barWidth, edgecolor ='grey', label ='avrage') 
+plt.bar(br3, df_min["winrate"], color ='b', width = barWidth, edgecolor ='grey', label ='min') 
+
+plt.xticks([r + barWidth for r in range(len(df_max["class"]))],df_max["class"])
+plt.xlabel('Classas', fontweight ='bold', fontsize = 15) 
+plt.ylabel('Winrates', fontweight ='bold', fontsize = 15) 
+plt.legend()
+plt.show()
