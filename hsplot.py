@@ -90,7 +90,7 @@ axs[1, 1].bar(top_climb_arch ['name'],top_climb_arch ['climb_speed'], color='gre
 axs[1, 1].set_title("?Nem tudom hogy hívják ezt?")
 plt.show()
 
-####### ehhez van egy másik megoldásom is, bár az y tengelyen az értékek eloszlását nem tudom szépen megoldani #######
+####### ehhez van egy másik megoldásom is #######
 fig = plt.figure(figsize=(24, 14),layout='constrained')
 
 fig.suptitle('Legjobb archetype-ok')
