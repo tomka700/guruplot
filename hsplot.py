@@ -91,49 +91,61 @@ axs[1, 1].set_title("?Nem tudom hogy hívják ezt?")
 plt.show()
 
 ####### ehhez van egy másik megoldásom is, bár az y tengelyen az értékek eloszlását nem tudom szépen megoldani #######
-
-fig = plt.figure(figsize=(24, 8),layout='constrained')
+fig = plt.figure(figsize=(24, 14),layout='constrained')
 
 fig.suptitle('Legjobb archetype-ok')
 fig1, fig2, fig3 = fig.subfigures(1, 3)
 
+
 top_winrate_arch = df.nlargest(5, 'winrate')
 top_pop_arch = df.nlargest(5, 'pop')
+x1_1=np.arange(len(top_winrate_arch))
+y1_1 = np.linspace(0,top_winrate_arch['winrate'].max(),5) 
 ax1 = fig1.subplots(2, 1, sharex=True)
 ax1[0].set_xlabel('Legnagyobb nyerésrátájúak')
-ax1[0].bar(top_winrate_arch['name'],top_winrate_arch['winrate'], color='green', edgecolor='darkgreen')
-ax1[0].set_yticks(range(int(top_winrate_arch['winrate'].min()), int(top_winrate_arch['winrate'].max())+1, 1))
-ax1[0].tick_params(axis='x', rotation=45)
+ax1[0].bar(x1_1,top_winrate_arch['winrate'], color='green', edgecolor='darkgreen')
+ax1[0].set_xticks(x1_1)
+ax1[0].set_yticks(y1_1)
+ax1[0].set_xticklabels(top_winrate_arch['name'], rotation=45)
 
 y1_2 = np.linspace(top_pop_arch['pop'].min(),top_pop_arch['pop'].max(),5)
+x1_2=np.arange(len(top_pop_arch))
 ax1[1].set_xlabel('Legnépszerűbbek')
-ax1[1].bar(top_pop_arch['name'],top_pop_arch['pop'], color='blue', edgecolor='darkblue')
+ax1[1].bar(x1_2,top_pop_arch['pop'], color='blue', edgecolor='darkblue')
+ax1[1].set_xticks(x1_2)
 ax1[1].set_yticks(y1_2)
-ax1[1].tick_params(axis='x', rotation=45)
+ax1[1].set_xticklabels(top_pop_arch['name'], rotation=45)
 
 
 top_turn_arch = df.nlargest(5, 'turns')
 top_dur_arch = df.nlargest(5, 'duration')
 ax2 = fig2.subplots(2,1, sharex=True)
-y2_1 = np.linspace(top_turn_arch['turns'].min(),top_turn_arch['turns'].max(),5)
+x2_1=np.arange(len(top_turn_arch))
+y2_1 = np.linspace(0,top_turn_arch['turns'].max(),5)
 ax2[0].set_xlabel('Legtöbb körösek')
-ax2[0].bar(top_turn_arch['name'],top_turn_arch['turns'], color='green', edgecolor='darkgreen')
+ax2[0].bar(x2_1,top_turn_arch['turns'], color='green', edgecolor='darkgreen')
+ax2[0].set_xticks(x2_1)
 ax2[0].set_yticks(y2_1)
-ax2[0].tick_params(axis='x', rotation=45)
+ax2[0].set_xticklabels(top_turn_arch['name'], rotation=45)
 
-y2_2 = np.linspace(top_dur_arch['duration'].min(),top_dur_arch['duration'].max(),5)
+x2_2=np.arange(len(top_dur_arch))
+y2_2 = np.linspace(0,top_dur_arch['duration'].max(),5)
 ax2[1].set_xlabel('?Nem tudom hogy hívják ezt?')
-ax2[1].bar(top_dur_arch['name'],top_dur_arch['duration'], color='magenta', edgecolor='red')
+ax2[1].bar(x2_2,top_dur_arch['duration'], color='magenta', edgecolor='red')
+ax2[1].set_xticks(x2_2)
 ax2[1].set_yticks(y2_2)
-ax2[1].tick_params(axis='x', rotation=45)
+ax2[1].set_xticklabels(top_dur_arch['name'], rotation=45)
+
 
 top_climb_arch = df.nlargest(5, 'climb_speed')
 ax3 = fig3.subplots(1,1, sharex=True)
-y3 = np.linspace(top_climb_arch['climb_speed'].min(),top_climb_arch['climb_speed'].max(),5)
+y3 = np.linspace(0,top_climb_arch['climb_speed'].max(),5)
 ax3.set_title('?Nem tudom hogy hívják ezt?')
 ax3.bar(top_climb_arch ['name'],top_climb_arch ['climb_speed'], color='grey', edgecolor='black')
+#x =  np.arange(len(top_climb_arch ['name']))
 ax3.set_yticks(y3)
 ax3.tick_params(axis='x', rotation=45)
+
 plt.show()
 
 
