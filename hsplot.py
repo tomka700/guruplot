@@ -149,9 +149,9 @@ ax3.tick_params(axis='x', rotation=45)
 plt.show()
 
 
+
 #rendezhetnénk népszerűségben csökkenő/növekvő sorrendben az archetype-okat, 
 #és kilpotolhatnánk az értékekei ilyen pontokkal és azokra ileszthetnénk egy görbét, 
-#aztnán a görbén kijelölnénk egy ponttal a legjobb winrate-s, a max turns értékű archetype-ot
 import numpy as np
 from scipy import interpolate
 
@@ -176,6 +176,8 @@ plt.legend()
 plt.title("Archetype-ok népszerűsége")
 plt.show()
 
+
+
 #lehetne csinálni olyat hogy class-onként megkeres max-ot,átlagot, mint és kiplotol egy bars-t
 df_max = df.groupby("class")["winrate"].max().reset_index()
 df_min = df.groupby("class")["winrate"].min().reset_index()
@@ -197,3 +199,7 @@ plt.xlabel('Classas', fontweight ='bold', fontsize = 15)
 plt.ylabel('Winrates', fontweight ='bold', fontsize = 15) 
 plt.legend()
 plt.show()
+
+#Lehetne hogy class szerint kiválogatjuk a 300-nál kisebb pop-osokat, 
+#x tengely pontjai:abc szerint sorba rakva a nevek, 
+#pot-okra görbét illeszt, rá mutat legnagyobb étékű pontra a plot-on
