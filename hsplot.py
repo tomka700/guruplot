@@ -200,6 +200,36 @@ plt.ylabel('Winrates', fontweight ='bold', fontsize = 15)
 plt.legend()
 plt.show()
 
-#Lehetne hogy class szerint kiválogatjuk a 300-nál kisebb pop-osokat, 
+
+
+#Lehetne hogy a Durid class elemeit kiválogatjuk, 
 #x tengely pontjai:abc szerint sorba rakva a nevek, 
 #pot-okra görbét illeszt, rá mutat legnagyobb étékű pontra a plot-on
+
+df = df[df["class"] == "Druid"]
+sorted_df = df.sort_values('name').reset_index(drop=True)
+#winrate_sort_df = df.sort_values('winrate')
+
+num_rows = len(sorted_df.index)
+x = np.linspace(0, num_rows - 1, num_rows)
+y = sorted_df["winrate"]
+
+f_lin = interpolate.interp1d(x, y, kind="linear")
+
+max_y = sorted_df["winrate"].max()
+max_names = sorted_df[sorted_df["winrate"] == max_y]["name"]
+
+xx = np.linspace(0, num_rows - 1, 400)
+plt.figure()
+plt.plot(x, y, "o")
+plt.plot(xx, f_lin(xx))
+plt.xticks(x, sorted_df['name'], rotation=45)
+if num_rows>=4:
+    f_cub = interpolate.interp1d(x, y, kind="cubic")
+    plt.plot(xx, f_cub(xx))
+for i in max_names.index:
+    plt.annotate("max értékű",
+                 xy=(x[i], sorted_df.loc[i, "winrate"]), 
+                 xytext=(x[i], sorted_df.loc[i, "winrate"] + 1), 
+                 arrowprops=dict(arrowstyle="->",connectionstyle="arc3,rad=.2"))
+plt.show()
