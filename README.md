@@ -8,7 +8,7 @@ This project is about plotting and analyzing [Hearthstone](https://hearthstone.b
 Using [pip](https://pip.pypa.io) is recommended.
 
 # How to get the data
-- go to [the hsguru meta page](https://www.hsguru.com/meta)
-- open developer tools (usually F12) and navigate to your browser's console
-- copy the contents of `hs.js` and paste it into the console and run it
-- copy the output from the console and paste it into `hsplot.ipynb` where it says `# replace this with the input`
+- Go to [the hsguru meta page](https://www.hsguru.com/meta)
+- Open developer tools (usually F12) and navigate to your browser's console
+- Copy the contents of `hs.js` and paste it into the console and run it
+- Copy the output from the console and paste it into `hsplot.ipynb` where it says `# replace this with the input`
