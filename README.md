@@ -1,5 +1,10 @@
 # Intro
-This project is about plotting and analyzing [Hearthstone](https://hearthstone.blizzard.com) stats found on [the hsguru meta page](https://www.hsguru.com/meta).
+This project is about plotting and analyzing stats of [Hearthstone](https://hearthstone.blizzard.com) deck archetypes found on [the hsguru meta page](https://www.hsguru.com/meta).
+
+A deck archetype is a subjective classification of a deck of Hearthstone cards into a category of similar decks, usually denoted by:
+- Universal classifiers (XL / HL) if applicable
+- A common name
+- The deck's [class](https://hearthstone.blizzard.com/heroes) (e.g. Warrior) if applicable
 
 # You will need
 - [Python](https://www.python.org/downloads) (matplotlib, seaborn, pandas, numpy)
