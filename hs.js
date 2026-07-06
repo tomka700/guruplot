@@ -1,6 +1,6 @@
 (() => [
   new URLSearchParams(location.search).get("rank") || "diamond_to_legend",
-  [...document.querySelectorAll("table.table tbody tr")].map(row => ({
+  [...document.querySelectorAll("table tbody tr")].map(row => ({
     name: row.cells[0].textContent.trim(),
     winrate: parseFloat(row.cells[1].textContent),
     pop: parseInt(row.cells[2].textContent.match(/\(([\d,]+)\)/)[1].replace(/,/g, '')),
